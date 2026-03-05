@@ -1,0 +1,10 @@
+Create a web challenge that is vulnerable to a command injection, similar to the one in ../03-tutorial-web-command-injection/.
+The structure will be similar, except that the code is using Node, and the vulnerability is caused by the use of the `eval()` function in the JavaScript code.
+
+So the structure would be:
+
+- src/: Node source code file
+- deploy/: Dockerfile and helper scripts to deploy the file
+- solve/: Dockerfile (and potentially helper scripts) to solve the challenge and get the flag
+- flag: contains the flag with the contents D4S_CTF{bring_it_on}
+- README.md: top-level README

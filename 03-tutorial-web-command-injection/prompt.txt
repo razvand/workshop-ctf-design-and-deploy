@@ -1,0 +1,10 @@
+Create a web challenge that is vulnerable to a command injection.
+The challenge is written in PHP and exposes a form that asks for an IP address and runs ping -c 1 on that IP address.
+It uses the PHP exec() function to run the command and is vulnerable to command injection.
+Use the structure similar to the previous challenges:
+
+- src/: PHP source code file
+- deploy/: Dockerfile and helper scripts to deploy the file
+- solve/: Dockerfile (and potentially helper scripts) to solve the challenge and get the flag
+- flag: contains the flag with the contents D4S_CTF{make_one_wrong_move_please}
+- README.md: top-level README

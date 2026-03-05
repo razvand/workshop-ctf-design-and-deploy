@@ -1,0 +1,47 @@
+The current directory stores a simple pwn / binary CTF challenge. The challenge builds the piece_of_pice no-pie binary and then creates a container where to deploy it.
+
+The binary is vulnerable and can be exploited to extract the flag from a file (inside the container - /home/ctf/flag).
+
+The contents are:
+- src/: stores the source code file and the Makefile to build it
+- public/: stores the resulting binary file, together with the loader and libc required to run it; we want to use the same loader and libc in the deployment to be sure of the same characterisitics
+- deploy/: stores the Dockerfile and related files to deploy the vulnerable binary using an xinetd-deployment
+- sol/: the solution directory
+
+Do the following:
+
+1. Fix the solution in sol/exploit.py. The solution requires pwntools, so this means using a Python virtual environment, already in the sol/.venv/ directory. The solution may not work because of alignment issue in the libc library. In which case it generally requires a ROP-gadget "ret" to add 8 extra bytes to the stack alignment.
+
+2. Make the solution run both locally (directly starting the binary executable) and with a Docker deployment (i.e. connecting to port 31500 on localhost).
+
+3. Create a directory structure with 4 directories:
+
+   build/
+   deploy/
+   publish/
+   solve/
+
+   The build/ directory is the current src/ directory but uses a Docker container to build the binary file. This is to allow building the binary file even for users who don't have an active development environment on their system. And to ensure the same compiler version being used.
+
+   The deploy/ directory is the current one.
+
+   The publish/ directory is the public/ directory but uses a Docker container to create an archive of the directory contents. The archive is created in order to eventually be served to contestants.
+
+   The solve/ directory is the current sol/ directory but uses a Docker container to run the solution script. The solution script inside the Docker container can run in 3 modes:
+   - loads and runs the current binary (and libc and loader) inside the container
+   - queries the service (based on the deploy directory) running on a local Docker deployment (i.e. localhost)
+   - queries the service (based on the deploy directory) running on a remote Docker deployment (based on an IP address).
+
+   Add a README.md in each directory with the instruction required to build, deploy, publish, solve the challenge.
+
+Do not assume the user has access to Make or GCC or any other commands. Everything has to happen on Docker.
+
+Add concrete instructions to use docker commands (docker build / docker run) to build and run the deploy container.
+
+Add concrete instructions in the build/README.md file to build and run the container to build the source code file in a binary and have the binary available locally; for this, in the docker run command, mount the local directory.
+
+Same for the solve/ directory; make everything only via Docker commands.
+
+Same in the publish/ directory; mount the local directory to store the generated zip file locally.
+
+Create a top-level README.md file with information about the challenge and the role of each directory (and the flag).

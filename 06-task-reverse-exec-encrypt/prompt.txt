@@ -1,0 +1,20 @@
+Create a reverse challenge.
+The challenge creates an ELF binary file that has inside it an encrypted message. The message is encrypted with AES and the key that is actually part of the code area of the ELF binary file.
+The challenge is retrieve the original message.
+The original message is actually the flag from the flag file.
+
+Use the structure similar to the previous challenges:
+
+- src/: the generator of the source code file (using the contents of the flag file) and then the builder of the ELF file
+- publish/: the directory where the final ELF file is stored and the Dockerfile and other files to create the archive to be published to contestants
+- solve/: Dockerfile (and potentially helper scripts) to solve the challenge to retrieve the flag
+- flag: contains the flag with the contents D4S_CTF{hidden_in_plain_sight}; it is used by files in src/ as the message to be encrypted
+- README.md: top-level README with information about the challenge and instructions in creating the challenge resource files and publishing them
+
+All directories and steps must be done in Docker containers, via Dockerfiles.
+We do not assume the user having anything else apart from Docker installed on their system.
+Any build, pack, deploy, solve steps must be done inside a Docker container.
+
+Add a README.md file in each directory src/ publish/ solve/ similar to the other challenges (in ../01-tutorial-pwn-call-shell, ../03-tutorial-web-command-injection).
+Each README.md will provide instructions specific to that directory.
+The top-level README.md will offer high-level instructions, similar, again, to the other challenges.

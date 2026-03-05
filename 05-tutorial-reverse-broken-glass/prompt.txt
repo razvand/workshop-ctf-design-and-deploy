@@ -1,0 +1,20 @@
+Create a reverse challenge.
+The challenge is a large 16384x16384 PNG image that contains the message D4S_CTF{all_work_no_play} as a squared message (meaning letters are arranged in a square-like manner).
+Then the image is broken into 256 equal squares in PNG files numbered 000.png to 255.png.
+The challenge is to restore the initial square image to see the message.
+
+Use the structure similar to the previous challenges:
+
+- src/: the generator of the initial image and the split of the image into 256 smaller images
+- publish/: the directory where the 256 smaller images are to be copied and then archived to be published to contestants
+- solve/: Dockerfile (and potentially helper scripts) to solve the challenge and restore the original image - the contestat could then open the image and read the flag
+- flag: contains the flag with the contents D4S_CTF{all_work_no_play}; it is used by the generator in src/
+- README.md: top-level README with information about the challenge and instructions in creating the challenge resource files and publishing them
+
+All directories and steps must be done in Docker containers, via Dockerfiles.
+We do not assume the user having anything else apart from Docker installed on their system.
+Any build, pack, deploy, solve steps must be done inside a Docker container.
+
+Add a README.md file in each directory src/ publish/ solve/ similar to the other challenges (in ../01-tutorial-pwn-call-shell, ../03-tutorial-web-command-injection).
+Each README.md will provide instructions specific to that directory.
+The top-level README.md will offer high-level instructions, similar, again, to the other challenges.

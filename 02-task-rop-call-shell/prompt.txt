@@ -1,0 +1,13 @@
+The current directory stores a simple pwn / binary CTF challenge with all instructions to build, publish, deploy and solve the challenge.
+It is a copy of the similar tutorial challenge.
+
+Adapt the challenge to not store any reference to the `system()` or `/bin/sh` strings.
+The challenge solution will then have to use ROP (return-oriented programming) to leak the addresses of the standard C library symbols (the `system()` function and the `/bin/sh` string).
+
+It may be the case that recent GCC compiler versions remove ROP gadgets from the generated binary.
+In this case, either use an older GCC version, or add inside the source code inline assembly for the gadgets or another workaround to be able to leak the addresses of standard C library symbols.
+
+Also, make any adjustment required in oder to make the challenge and the solution work (such as increasing the buffer size, using other libc version).
+
+Maintain the same directory structure, including having everything work strictly with Docker commands.
+Validate the solution is working.
